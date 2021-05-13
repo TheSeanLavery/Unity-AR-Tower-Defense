@@ -62,6 +62,7 @@ public class Enemy : MonoBehaviour
         }
     }
 
+    public GameObject explosionParticle;
     public void ExplodeEnemy()
     {
         GameManager.Instance.currentScore += Value;

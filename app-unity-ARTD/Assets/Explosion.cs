@@ -1,31 +1,34 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Arrow : ProjectileBase
+public class Explosion : MonoBehaviour
 {
-    // Start is called before the first frame update
-    public override void Start()
+    void Start()
     {
-         
+        StartCoroutine(Explode());
     }
 
     
+    
 
-    // Update is called once per frame
-    void Update()
+    IEnumerator Explode()
     {
-        
+        yield return new WaitForSeconds(.1f);
+        Destroy(gameObject);
+        yield return null;
     }
+
+    public float damage;
 
     private void OnCollisionEnter(Collision other)
     {
-        if (other.collider.CompareTag("Enemy"))
+        if (other.collider.tag == "Enemy")
         {
             var enemy = other.collider.GetComponentInParent<Enemy>();
             enemy.TakeDamge(damage);
             Destroy(gameObject);
-            CancelInvoke();
         }
     }
 }

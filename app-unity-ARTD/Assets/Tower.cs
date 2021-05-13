@@ -32,18 +32,23 @@ public class Tower : MonoBehaviour
     public float speed = 1;
     public float range = 1;
     public int cost = 1;
-
+    public float ProjectileSpeed = 5;
+    
+    
     public void ShootNearest()
     {
         Rigidbody target = GameManager.Instance.getClosestEnemy(transform.position);
         
         if(target == null) return;
         var projectile =  Instantiate(projectilePrefab, transform.position, transform.rotation);
+
+        ProjectileBase projectileBase = projectile.GetComponent<ProjectileBase>();
+        projectileBase.damage = Damage;
         projectile.transform.LookAt(target.transform.position);
         GameManager.Instance.Projectiles.Add((projectile));
         var rb = projectile.GetComponent<Rigidbody>();
-
-        rb.velocity = rb.transform.forward * 5;
+    
+        rb.velocity = rb.transform.forward * ProjectileSpeed;
     }
     
 

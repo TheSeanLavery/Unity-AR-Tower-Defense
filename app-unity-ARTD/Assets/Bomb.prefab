@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3558725945644081538}
   - component: {fileID: 3558725945644081549}
   - component: {fileID: 3558725945644081548}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -106,7 +106,7 @@ GameObject:
   - component: {fileID: 3558725946406912986}
   - component: {fileID: 3558725946406912987}
   - component: {fileID: 3558725946406912984}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,6 +140,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 36509fee071ee6c41bbae814e3b0acac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  damage: 0
+  ExplosionPrefab: {fileID: 8352561361069293324, guid: 57390bfc21b2bab4da5f27330e7b18b3,
+    type: 3}
+  ExplosionParticles: {fileID: 8742055224048884986, guid: 796c12ec21a9cee428a371b67ec473c3,
+    type: 3}
 --- !u!54 &3558725946406912984
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -151,7 +156,7 @@ Rigidbody:
   m_Mass: 1
   m_Drag: 0
   m_AngularDrag: 0.05
-  m_UseGravity: 1
+  m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 0
