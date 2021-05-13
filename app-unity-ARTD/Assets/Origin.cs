@@ -51,7 +51,8 @@ public class Origin : MonoBehaviour
         int randomEnemy = (int)(EnemyPrefabs.Count * Random.Range(0f, 1f));
         Enemy enemy =  Instantiate(EnemyPrefabs[randomEnemy],transform.position,transform.rotation);
         spawnedEnemies.Add(enemy);
-        
+        GameManager.Instance.EnemiesLeft--;
+
 
     }
 

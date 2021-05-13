@@ -45,6 +45,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38e491ada0684244a9b06609d3e23cba, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  type: 0
+  Damage: 2
+  speed: 4
+  range: 4
+  cost: 1
+  projectilePrefab: {fileID: 5741687011404792779, guid: 9f5c01908f04a7845910ce74cba42a3e,
+    type: 3}
 --- !u!1 &8908878988289459021
 GameObject:
   m_ObjectHideFlags: 0

@@ -15,4 +15,16 @@ public class Arrow : MonoBehaviour
     {
         
     }
+
+    public float damage=1;
+    
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.CompareTag("Enemy"))
+        {
+            var enemy = other.collider.GetComponentInParent<Enemy>();
+            enemy.TakeDamge(damage);
+            Destroy(gameObject);
+        }
+    }
 }

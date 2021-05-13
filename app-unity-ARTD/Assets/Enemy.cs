@@ -20,7 +20,7 @@ public class Enemy : MonoBehaviour
         
     }
 
-    private Rigidbody rb;
+    public Rigidbody rb;
     
     
 
@@ -28,12 +28,13 @@ public class Enemy : MonoBehaviour
     public float MaxHealth = 1;
     public float speed = 1;
     public float DefaultSpeed = 1;
-
+    public int Value;
     
     public void Kill()
     {
         //TODO turn this into a method inside GameManager
         GameManager.Instance.AliveEnemies.Remove(this);
+        Destroy(gameObject);
     }
 
     public Vector3 targetLocation;
@@ -58,6 +59,23 @@ public class Enemy : MonoBehaviour
             
             Destroy(gameObject);
             
+        }
+    }
+
+    public void ExplodeEnemy()
+    {
+        GameManager.Instance.currentScore += Value;
+        GameManager.Instance.origin.spawnedEnemies.Remove(this);
+        Destroy(gameObject);
+        
+    }
+    
+    public void TakeDamge(float damage)
+    {
+        Health -= damage;
+        if (Health <= 0)
+        {
+            ExplodeEnemy();
         }
     }
 }
