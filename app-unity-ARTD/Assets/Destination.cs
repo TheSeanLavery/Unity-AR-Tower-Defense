@@ -10,11 +10,25 @@ public class Destination : MonoBehaviour
         {
             Destroy(Instance.gameObject);
         }
-        Instance = this;
 
+        if (GameManager.Instance.origin != null)
+        {
+            float distance = Vector3.Distance(GameManager.Instance.origin.transform.position,
+                transform.position);
+            if (distance
+                < GameManager.Instance.defaultSpeedOfEnemies * MinTime)
+            {
+                Destroy(gameObject);
+            
+            }
+            
+        }
+        
+        Instance = this;
         GameManager.Instance.destination = Instance;
     }
 
+    public float MinTime = 10;
     public static Destination Instance;
 
     // Update is called once per frame
