@@ -284,7 +284,7 @@ GameObject:
   - component: {fileID: 270022459}
   - component: {fileID: 270022458}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: ScoreTExt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -867,6 +867,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   origin: {fileID: 0}
   destination: {fileID: 0}
+  currentCoins: 0
   CurrentWave: 0
   EnemiesLeft: 0
   AliveEnemies: []
@@ -3702,7 +3703,7 @@ GameObject:
   - component: {fileID: 1515766647}
   - component: {fileID: 1515766646}
   m_Layer: 5
-  m_Name: Text (TMP) (1)
+  m_Name: LiveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -3945,7 +3946,7 @@ GameObject:
   - component: {fileID: 1752980840}
   - component: {fileID: 1752980839}
   m_Layer: 5
-  m_Name: Text (TMP) (3)
+  m_Name: RemainingText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4608,7 +4609,7 @@ GameObject:
   - component: {fileID: 2107043571}
   - component: {fileID: 2107043570}
   m_Layer: 5
-  m_Name: Text (TMP) (2)
+  m_Name: WaveText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
