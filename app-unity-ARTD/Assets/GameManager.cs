@@ -41,17 +41,24 @@ public class GameManager : MonoBehaviour
 
         if (CheckGameReady())
         {
-            CurrentWave = 0;
-            EnemiesLeft = 0;
+            ResetVariables();
             StartWave(CurrentWave);
-            
         }
         else
         {
 
             GameNotReady();
         }
-      
+    }
+
+    public void ResetVariables()
+    {
+        CurrentWave = 0;
+        EnemiesLeft = 0;
+        currentScore = 0;
+        currentCoins = 0;
+        Health = 5;
+        
     }
 
     public GameObject GameNotReadyUI;
@@ -67,11 +74,7 @@ public class GameManager : MonoBehaviour
         origin.DestroyEnemies();
         Destroy(origin.gameObject);
         Destroy(destination.gameObject);
-        CurrentWave = 0;
-        EnemiesLeft = 0;
-        currentScore = 0;
-        currentCoins = 0;
-        Health = 5;
+        ResetVariables();
     }
     private int currentScore;
     public float defaultSpeedOfEnemies = 1;
@@ -108,9 +111,21 @@ public class GameManager : MonoBehaviour
         
     }
 
-    public static void TakeDamage()
+    public void TakeDamage()
     {
-        
+        Health -= 1;
+        if (Health == 0)
+        {
+            Health = 0;
+            TriggerGameOver();
+        }
+
+        if (Health < 0) Health = 0;
+    }
+
+    private void TriggerGameOver()
+    {
+        GameOverPanel.SetActive(true);
     }
 
     public void DrawUI()
@@ -118,7 +133,7 @@ public class GameManager : MonoBehaviour
         HealthText.text = "Lives: " + Health;
         WaveText.text = "Wave: " + CurrentWave;
         CoinsText.text = "Coins: " + currentCoins;
-        RemainingText.text = "Remaining: " + RemainingText;
+        RemainingText.text = "Remaining: " + EnemiesLeft;
         scoreText.text = "Score: " + currentScore;
     }
 
@@ -127,7 +142,9 @@ public class GameManager : MonoBehaviour
     public  TMP_Text WaveText;
     public  TMP_Text CoinsText;
     public  TMP_Text RemainingText;
-   
+
+    public GameObject GameOverPanel;
+
 }
 
 [Serializable]

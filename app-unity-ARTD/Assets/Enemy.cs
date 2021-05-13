@@ -54,7 +54,7 @@ public class Enemy : MonoBehaviour
         {
 
             GameManager.Instance.origin.spawnedEnemies.Remove(this);
-            GameManager.TakeDamage();
+            GameManager.Instance.TakeDamage();
             
             Destroy(gameObject);
             
