@@ -6,13 +6,17 @@ using UnityEngine;
 public class Origin : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         if (Instance != null)
         {
             Destroy(Instance.gameObject);
         }
         Instance = this;
+
+        GameManager.Instance.origin = Instance;
+
+
     }
 
     public static Origin Instance;

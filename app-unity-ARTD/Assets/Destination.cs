@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class Destination : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
-        
+        if (Instance != null)
+        {
+            Destroy(Instance.gameObject);
+        }
+        Instance = this;
+
+        GameManager.Instance.destination = Instance;
     }
+
+    public static Destination Instance;
 
     // Update is called once per frame
     void Update()

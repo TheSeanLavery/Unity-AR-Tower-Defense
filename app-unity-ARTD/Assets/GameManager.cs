@@ -13,8 +13,8 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
 
-    public GameObject origin;
-    public GameObject destination;
+    public Origin origin;
+    public Destination destination;
 
     public int CurrentWave;
 
