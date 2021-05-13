@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor;
@@ -45,5 +46,18 @@ public class Enemy : MonoBehaviour
         rb.velocity = T.forward * speed;
 
 
+    }
+
+    private void OnCollisionEnter(Collision other)
+    {
+        if (other.collider.tag == "Destination")
+        {
+
+            GameManager.Instance.origin.spawnedEnemies.Remove(this);
+            GameManager.TakeDamage();
+            
+            Destroy(gameObject);
+            
+        }
     }
 }
