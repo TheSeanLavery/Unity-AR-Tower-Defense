@@ -8,10 +8,10 @@ public class SetPlacedPrefab : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        placer = GetComponent<PlaceMultipleObjectsOnPlane>();
+        placer = GetComponent<PlaceTDObjects>();
     }
 
-    private PlaceMultipleObjectsOnPlane placer;
+    private PlaceTDObjects placer;
 
 
 
@@ -22,6 +22,8 @@ public class SetPlacedPrefab : MonoBehaviour
 
     public GameObject Destination;
 
+    
+    
     public void SetTower()
     {
         placer.placedPrefab = TowerPrefab;
