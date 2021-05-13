@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -17,6 +18,7 @@ public class GameManager : MonoBehaviour
     public Origin origin;
     public Destination destination;
 
+    public int currentCoins = 0;
     public int CurrentWave;
 
     public int EnemiesLeft;
@@ -67,9 +69,11 @@ public class GameManager : MonoBehaviour
         Destroy(destination.gameObject);
         CurrentWave = 0;
         EnemiesLeft = 0;
+        currentScore = 0;
+        currentCoins = 0;
         Health = 5;
     }
-
+    private int currentScore;
     public float defaultSpeedOfEnemies = 1;
 
     [SerializeField] public List<EnemyList> WaveList = new List<EnemyList>();
@@ -86,7 +90,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        DrawUI();
     }
 
     private bool CheckGameReady()
@@ -108,6 +112,22 @@ public class GameManager : MonoBehaviour
     {
         
     }
+
+    public void DrawUI()
+    {
+        HealthText.text = "Lives: " + Health;
+        WaveText.text = "Wave: " + CurrentWave;
+        CoinsText.text = "Coins: " + currentCoins;
+        RemainingText.text = "Remaining: " + RemainingText;
+        scoreText.text = "Score: " + currentScore;
+    }
+
+    public  TMP_Text HealthText;
+    public TMP_Text scoreText;
+    public  TMP_Text WaveText;
+    public  TMP_Text CoinsText;
+    public  TMP_Text RemainingText;
+   
 }
 
 [Serializable]
