@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.XR.ARFoundation;
 using UnityEngine.XR.ARSubsystems;
 
@@ -39,7 +40,16 @@ public class PlaceTDObjects : MonoBehaviour
     {
         m_RaycastManager = GetComponent<ARRaycastManager>();
     }
-
+    public static bool IsPointerOverUIObject(Vector2 touchPosition)
+    {
+        PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
+        pointerEventData.position = touchPosition;
+        List<RaycastResult> raycastResults = new List<RaycastResult>();
+ 
+        EventSystem.current.RaycastAll(pointerEventData, raycastResults);
+ 
+        return raycastResults.Count > 0;
+    }
     void Update()
     {
         if (Input.touchCount > 0)
@@ -48,6 +58,8 @@ public class PlaceTDObjects : MonoBehaviour
 
             if (touch.phase == TouchPhase.Began)
             {
+                if(IsPointerOverUIObject(touch.position)) return;
+                
                 if (m_RaycastManager.Raycast(touch.position, s_Hits, TrackableType.PlaneWithinPolygon))
                 {
                     
