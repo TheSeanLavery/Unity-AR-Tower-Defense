@@ -49,7 +49,7 @@ MonoBehaviour:
   type: 1
   Damage: 1
   speed: 8
-  range: 5
+  range: 2
   cost: 10
   ProjectileSpeed: 8
   projectilePrefab: {fileID: 3558725946406912965, guid: 8b5e5ecbfed7ae940b03c3f70e89a6d8,
