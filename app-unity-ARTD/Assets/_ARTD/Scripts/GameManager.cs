@@ -108,7 +108,7 @@ public class GameManager : MonoBehaviour
         yield return new WaitForSeconds(1);
         TimeLeftText.text = "Wave Starts in: " +2;
         yield return new WaitForSeconds(1);
-        TimeLeftText.text = "Wave Starts  in: " +1;
+        TimeLeftText.text = "Wave Starts in: " +1;
         yield return new WaitForSeconds(1);
         TimeLeftText.text = "START!";
         StartWave(CurrentWave); // gamestate is set inside Startwave
