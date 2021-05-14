@@ -67,9 +67,12 @@ public class Tower : MonoBehaviour
             
                 Rigidbody target = GameManager.Instance.getClosestEnemy(transform.position);
 
-                if (target != null)
+                float distanceToTarget = Vector3.Distance(transform.position, target.position);
+
+                Vector3 realTarget = target.position + (target.velocity * (distanceToTarget / ProjectileSpeed));
+                if (target != null && distanceToTarget < range)
                 {
-                    ShootTarget(target.position);
+                    ShootTarget(realTarget);
                 }
                 yield return new WaitForSeconds(speed);
                 
