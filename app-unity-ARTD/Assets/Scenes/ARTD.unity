@@ -1313,6 +1313,7 @@ MonoBehaviour:
   TimeLeftText: {fileID: 597186466}
   GameOverPanel: {fileID: 1835094128}
   SpawnedTowers: []
+  targetedEnemies: []
 --- !u!82 &436513651
 AudioSource:
   m_ObjectHideFlags: 0
