@@ -66,6 +66,7 @@ public class Tower : MonoBehaviour
                 yield return new WaitForEndOfFrame();
             
                 Rigidbody target = GameManager.Instance.getClosestEnemy(transform.position);
+                if(target == null) continue;
 
                 float distanceToTarget = Vector3.Distance(transform.position, target.position);
 
@@ -76,8 +77,9 @@ public class Tower : MonoBehaviour
                     yield return new WaitForSeconds(speed);
                 }
             }
+           
 
-            yield return new WaitForEndOfFrame();
+           yield return new WaitForEndOfFrame();
 
         }
         
