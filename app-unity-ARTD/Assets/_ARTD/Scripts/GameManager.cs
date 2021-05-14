@@ -210,6 +210,7 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        targetedEnemies.Clear();
         DrawUI();
     }
 
@@ -278,6 +279,8 @@ public class GameManager : MonoBehaviour
     public GameObject GameOverPanel;
     public List<Tower> SpawnedTowers;
 
+    public List<Enemy> targetedEnemies = new List<Enemy>();
+    
     public Rigidbody getClosestEnemy(Vector3 transformPosition)
     {
         float distance = float.MaxValue;
@@ -285,9 +288,8 @@ public class GameManager : MonoBehaviour
         foreach (var e in origin.spawnedEnemies)
         {
             var d = Vector3.Distance(e.transform.position, transformPosition);
-            if (d < distance)
+            if (d < distance && !targetedEnemies.Contains(e))
             {
-
                 distance = d;
                 closestEnemy = e;
             }
@@ -297,6 +299,7 @@ public class GameManager : MonoBehaviour
         {
             return null;
         }
+        targetedEnemies.Add(closestEnemy);
         return closestEnemy.rb;
     }
 }
