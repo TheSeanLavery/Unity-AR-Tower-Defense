@@ -144,9 +144,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 0
   Damage: 2
-  speed: 0.5
-  range: 4
-  cost: 1
+  speed: 4
+  range: 7
+  cost: 4
   ProjectileSpeed: 10
   projectilePrefab: {fileID: 5741687011404792779, guid: 9f5c01908f04a7845910ce74cba42a3e,
     type: 3}
@@ -162,7 +162,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: abc16d0566b84a548842aa8e508e7043, type: 3}
   m_PlayOnAwake: 1
-  m_Volume: 1
+  m_Volume: 0.397
   m_Pitch: 1
   Loop: 0
   Mute: 0

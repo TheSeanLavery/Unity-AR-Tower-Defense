@@ -145,7 +145,7 @@ MonoBehaviour:
   MaxHealth: 1
   speed: 0.2
   DefaultSpeed: 1
-  Value: 0
+  Value: 1
   targetLocation: {x: 0, y: 0, z: 0}
   explosionParticle: {fileID: 994870684606352658, guid: d3f21b34bb5652049a1aaa620f9d02eb,
     type: 3}
