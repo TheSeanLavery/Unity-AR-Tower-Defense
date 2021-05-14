@@ -10,10 +10,14 @@ public class GameManager : MonoBehaviour
     void Awake()
     {
         Instance = this;
+        source = GetComponent<AudioSource>();
     }
 
     public static GameManager Instance;
 
+
+    public AudioClip Applause;
+    private AudioSource source;
 
     public Origin origin;
     public Destination destination;
@@ -81,6 +85,7 @@ public class GameManager : MonoBehaviour
                 {
                     TimeLeftText.text = "Thank you! :)";
                     WinScreen.SetActive(true);
+                    source.PlayOneShot(Applause);
                     yield break;
                 }
             }
