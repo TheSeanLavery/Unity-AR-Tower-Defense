@@ -33,38 +33,57 @@ public class GameManager : MonoBehaviour
         Countdown,
         Playing,
         Finish,
-        InterWave
+        InterWave,
+        GameOver
     }
 
     public GameState gameState = GameState.Scanning;
 
     public void StartGame()
     {
+        StopAllCoroutines();
+        origin.StopAllCoroutines();
+        gameState = GameState.Ready;
         StartCoroutine(GameStartCoroutine());
 
     }
 
+    public GameObject WinScreen;
+    
+    private Coroutine roundRoutine;
+    private bool finishedRound = false;
     public IEnumerator GameStartCoroutine()
     {
         SoftReset();
+        
         if (CheckGameReady())
         {
-            ResetVariables();
-            gameState = GameState.Countdown;
-            TimeLeftText.text = "Wave Starts in: " +3;
-            yield return new WaitForSeconds(1);
-            TimeLeftText.text = "Wave Starts in: " +2;
-            yield return new WaitForSeconds(1);
-            TimeLeftText.text = "Wave Starts  in: " +1;
-            yield return new WaitForSeconds(1);
-            TimeLeftText.text = "START!";
-            StartWave(CurrentWave); // gamestate is set inside Startwave
-            yield return new WaitForSeconds(3);
-            TimeLeftText.text = "";
 
-            while (EnemiesLeft > 0) yield return null;
+            while (true)
+            {
 
-            TimeLeftText.text = "Wave Complete";
+                if (CurrentWave < 3)
+                {
+                    finishedRound = false;
+                    if (roundRoutine != null)
+                    {
+                        StopCoroutine(roundRoutine);
+                    }
+                    roundRoutine = StartCoroutine(RoundStartRoutine());
+
+                    while (finishedRound != true)
+                    {
+                        yield return null;
+                    }
+                    
+                }
+                else
+                {
+                    TimeLeftText.text = "Thank you! :)";
+                    WinScreen.SetActive(true);
+                    yield break;
+                }
+            }
         }
         else
         {
@@ -75,12 +94,43 @@ public class GameManager : MonoBehaviour
         yield return null;
     }
 
+    IEnumerator RoundStartRoutine()
+    {
+        ResetRoundVariables();
+        CurrentWave++;
+        gameState = GameState.Countdown;
+        TimeLeftText.text = "Wave Starts in: " +3;
+        yield return new WaitForSeconds(1);
+        TimeLeftText.text = "Wave Starts in: " +2;
+        yield return new WaitForSeconds(1);
+        TimeLeftText.text = "Wave Starts  in: " +1;
+        yield return new WaitForSeconds(1);
+        TimeLeftText.text = "START!";
+        StartWave(CurrentWave); // gamestate is set inside Startwave
+        yield return new WaitForSeconds(3);
+        TimeLeftText.text = "";
+        while (EnemiesLeft > 0 || origin.spawnedEnemies.Count > 0) yield return new WaitForSeconds(.1f);
+        TimeLeftText.text = "Wave Complete";
+        
+        origin.StopAllCoroutines();
+        
+        yield return new WaitForSeconds(3);
+        finishedRound = true;
+    }
+
     public void ResetVariables()
     {
         CurrentWave = 0;
-        EnemiesLeft = 0;
+       
         currentScore = 0;
         currentCoins = 20;
+        ResetRoundVariables();
+
+    }
+
+    public void ResetRoundVariables()
+    {
+        EnemiesLeft = 1;
         Health = 5;
         
     }
@@ -117,9 +167,7 @@ public class GameManager : MonoBehaviour
 
             SpawnedTowers.RemoveAt(i);
             Destroy(t.gameObject);
-
         }
-        
     }
 
 
@@ -145,8 +193,8 @@ public class GameManager : MonoBehaviour
     public void StartWave(int wave)
     {
         gameState = GameState.Playing;
-        origin.EnemyPrefabs = WaveList[wave].Enemies;
-        origin.StartWave(wave);
+        origin.EnemyPrefabs = WaveList[wave-1].Enemies;
+        origin.StartWave(wave-1);
         
     }
     
@@ -186,9 +234,17 @@ public class GameManager : MonoBehaviour
 
         if (Health < 0) Health = 0;
     }
-
+    
+    
+    /// <summary>
+    /// GAME OVER
+    /// </summary>
     private void TriggerGameOver()
     {
+        StopAllCoroutines();
+        TimeLeftText.text = "GAME OVER";
+        
+        gameState = GameState.GameOver;
         GameOverPanel.SetActive(true);
     }
 

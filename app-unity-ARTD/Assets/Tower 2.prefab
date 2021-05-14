@@ -47,7 +47,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   type: 1
   Damage: 1
-  speed: 1
+  speed: 8
   range: 2
   cost: 1
   ProjectileSpeed: 2

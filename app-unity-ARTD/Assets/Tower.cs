@@ -35,16 +35,14 @@ public class Tower : MonoBehaviour
     public float ProjectileSpeed = 5;
     
     
-    public void ShootNearest()
+    public void ShootTarget(Vector3 pos)
     {
-        Rigidbody target = GameManager.Instance.getClosestEnemy(transform.position);
         
-        if(target == null) return;
         var projectile =  Instantiate(projectilePrefab, transform.position, transform.rotation);
 
         ProjectileBase projectileBase = projectile.GetComponent<ProjectileBase>();
         projectileBase.damage = Damage;
-        projectile.transform.LookAt(target.transform.position);
+        projectile.transform.LookAt(pos);
         GameManager.Instance.Projectiles.Add((projectile));
         var rb = projectile.GetComponent<Rigidbody>();
     
@@ -61,11 +59,25 @@ public class Tower : MonoBehaviour
 
     IEnumerator ShootEveryInterval()
     {
-        while (GameManager.Instance.gameState == GameManager.GameState.Playing)
+        while (true)
         {
-            yield return new WaitForEndOfFrame();
-            ShootNearest();
-            yield return new WaitForSeconds(speed);
+            if (GameManager.Instance.gameState == GameManager.GameState.Playing)
+            {
+                yield return new WaitForEndOfFrame();
+            
+                Rigidbody target = GameManager.Instance.getClosestEnemy(transform.position);
+
+                if (target != null)
+                {
+                    ShootTarget(target.position);
+                }
+                yield return new WaitForSeconds(speed);
+                
+                
+            }
+
+            yield return null;
+
         }
         
         yield return null;

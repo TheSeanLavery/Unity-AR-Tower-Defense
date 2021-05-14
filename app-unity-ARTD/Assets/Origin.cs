@@ -21,6 +21,7 @@ public class Origin : MonoBehaviour
         waves.Clear();
         waves.Add(WavePattern01);
         waves.Add(WavePattern02);
+        waves.Add(WavePattern03);
     }
 
     private List<Func<IEnumerator>> waves = new List<Func<IEnumerator>>();
@@ -92,4 +93,16 @@ public class Origin : MonoBehaviour
         }
         yield return null;
     }
+    private IEnumerator WavePattern03()
+    {
+        GameManager.Instance.EnemiesLeft = 30;
+        
+        while (GameManager.Instance.EnemiesLeft > 0)
+        {
+            SpawnEnemy();
+            yield return new WaitForSeconds(.5f);    
+        }
+        yield return null;
+    }
+    
 }

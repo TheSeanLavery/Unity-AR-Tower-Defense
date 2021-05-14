@@ -28,14 +28,8 @@ public class Enemy : MonoBehaviour
     public float MaxHealth = 1;
     public float speed = 1;
     public float DefaultSpeed = 1;
-    public int Value;
+    public int Value = 1;
     
-    public void Kill()
-    {
-        //TODO turn this into a method inside GameManager
-        GameManager.Instance.AliveEnemies.Remove(this);
-        Destroy(gameObject);
-    }
 
     public Vector3 targetLocation;
     // Update is called once per frame
@@ -65,10 +59,13 @@ public class Enemy : MonoBehaviour
     public GameObject explosionParticle;
     public void ExplodeEnemy()
     {
-        GameManager.Instance.currentScore += Value;
+        GameManager.Instance.currentScore += Value *GameManager.Instance.CurrentWave;
+        GameManager.Instance.currentCoins += Value;
         GameManager.Instance.origin.spawnedEnemies.Remove(this);
         Destroy(gameObject);
-        
+
+        Instantiate(explosionParticle, transform.position, transform.rotation); 
+
     }
     
     public void TakeDamge(float damage)
