@@ -73,13 +73,11 @@ public class Tower : MonoBehaviour
                 if (target != null && distanceToTarget < range)
                 {
                     ShootTarget(realTarget);
+                    yield return new WaitForSeconds(speed);
                 }
-                yield return new WaitForSeconds(speed);
-                
-                
             }
 
-            yield return null;
+            yield return new WaitForEndOfFrame();
 
         }
         
